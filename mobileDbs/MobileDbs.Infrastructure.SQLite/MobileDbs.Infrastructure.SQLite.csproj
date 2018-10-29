@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="sqlite-net-sqlcipher" Version="1.5.176-beta" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MobileDbs.Domain.Models\MobileDbs.Domain.Models.csproj" />
+    <ProjectReference Include="..\MobileDbs.Infrastructure\MobileDbs.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

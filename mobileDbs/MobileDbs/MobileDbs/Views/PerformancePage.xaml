@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MobileDbs.Views.PerformancePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:MobileDbs.Converters;assembly=MobileDbs"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="{Binding Title}"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolNegativeConverter x:Key="BoolNegativeConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Padding="20" Spacing="10">
+        <Label
+            FontSize="Large"
+            HorizontalTextAlignment="Center"
+            Text="{Binding GeneralTime, StringFormat='General time: {0}'}" />
+        <Label
+            FontSize="Large"
+            HorizontalTextAlignment="Center"
+            Text="{Binding AverageTime, StringFormat='Average time: {0}'}" />
+        <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+            <Button
+                Command="{Binding TextCommand}"
+                CommandParameter="0"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource BoolNegativeConverter}}"
+                Text="Test It In Order" />
+            <Button
+                Command="{Binding TextCommand}"
+                CommandParameter="1"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource BoolNegativeConverter}}"
+                Text="Test It Not In Order" />
+        </StackLayout>
+        <Label
+            FontSize="Micro"
+            Text="{Binding TestResult}"
+            VerticalOptions="FillAndExpand" />
+    </StackLayout>
+</ContentPage>

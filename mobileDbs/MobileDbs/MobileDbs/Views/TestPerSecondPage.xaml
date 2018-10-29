@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MobileDbs.Views.TestPerSecondPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:MobileDbs.Converters;assembly=MobileDbs"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="{Binding Title}"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolNegativeConverter x:Key="BoolNegativeConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Padding="20" Spacing="10">
+        <Label
+            FontSize="Large"
+            HorizontalTextAlignment="Center"
+            Text="{Binding AverageCount, StringFormat='Average: {0}'}" />
+        <Label
+            FontSize="Large"
+            HorizontalTextAlignment="Center"
+            Text="{Binding GeneralCount, StringFormat='Processed records: {0}'}" />
+        <Label
+            FontSize="Large"
+            HorizontalTextAlignment="Center"
+            Text="{Binding AverageCrud}" />
+        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+            <Button
+                Command="{Binding TestCommand}"
+                HorizontalOptions="FillAndExpand"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource BoolNegativeConverter}}"
+                Text="Test" />
+        </StackLayout>
+        <Label
+            FontSize="Micro"
+            Text="{Binding TestResult}"
+            VerticalOptions="FillAndExpand" />
+    </StackLayout>
+
+</ContentPage>

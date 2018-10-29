@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MobileDbs.Views.SelectDatabasePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    NavigationPage.HasNavigationBar="False">
+
+    <StackLayout Padding="20" HorizontalOptions="Center">
+        <StackLayout Orientation="Horizontal">
+            <Switch IsToggled="{Binding DbSwitcher}" />
+            <Label Text="{Binding SelectedDbName}" />
+        </StackLayout>
+
+        <Button
+            Command="{Binding NavigateToTestPage}"
+            CommandParameter="PerformancePage"
+            Text="Performance Test" />
+
+        <Button
+            Command="{Binding NavigateToTestPage}"
+            CommandParameter="ConcurrencyPage"
+            Text="Concurrency Test" />
+
+        <Button
+            Command="{Binding NavigateToTestPage}"
+            CommandParameter="TestPerSecondPage"
+            Text="Test CRUD operation per second" />
+
+        <Button
+            Command="{Binding NavigateToTestPage}"
+            CommandParameter="FilteringPage"
+            Text="Filtering" />
+
+        <Button
+            Command="{Binding CleanDbCommand}"
+            Text="Clean Current DB"
+            VerticalOptions="EndAndExpand" />
+
+    </StackLayout>
+
+</ContentPage>

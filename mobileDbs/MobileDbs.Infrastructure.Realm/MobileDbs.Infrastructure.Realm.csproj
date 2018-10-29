@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Realm" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MobileDbs.Domain.Models\MobileDbs.Domain.Models.csproj" />
+    <ProjectReference Include="..\MobileDbs.Infrastructure\MobileDbs.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
