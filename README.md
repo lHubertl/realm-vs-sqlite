@@ -218,7 +218,7 @@ As you can see, we were executing CRUD operations for three different repositori
 
 **The verdict:** In this round, Realm is the winner. It scored 57% in the serial test and 62% in the parallel test, which means that Realm’s performance is better than SQLite’s. Realm is simply faster.
 
-[You can see more here..](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs/MobileDbs/ViewModels/PerformancePageViewModel.cs)
+[Click here for more](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs/MobileDbs/ViewModels/PerformancePageViewModel.cs)
 
 ## Concurrency
 The main idea of the concurrency test was to check the security of creating records in different threads. We ran 10 threads that were creating 10k records. After that, we checked if everything was created safely. Then, we calculated the total time.
@@ -250,7 +250,7 @@ private async Task ExecuteTest()
 
 **The verdict:** In this test, Realm wins once again. It’s faster than SQLite by 34%, meaning that Realm manages parallel calls better. Needless to say, it kept the data intact and unchanged.
 
-[You can see more here..](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs/MobileDbs/ViewModels/ConcurrencyPageViewModel.cs)
+[Click here for more](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs/MobileDbs/ViewModels/ConcurrencyPageViewModel.cs)
 
 ## Filtering and fetching 
 The filtering and fetching records are necessary to get the exact data we want. To test them, we generated 10k records randomly with the Age property between 30 and 65. After that, by using a simple expression, we got all the customers whose age is below 35 years. 
@@ -261,7 +261,7 @@ var filteringCustomers = (await _customerService.ReadByPredicate(item => item.Ag
 
 **The verdict:** The winner? Realm again, with a difference of 87%. Realm is almost 8 times faster than SQLite in filtering and fetching.  
 
-[You can see more here..](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs/MobileDbs/ViewModels/FilteringPageViewModel.cs)
+[Click here for more](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs/MobileDbs/ViewModels/FilteringPageViewModel.cs)
 
 ## CRUD per second 
 In this test, we launched each of the operations as many times as possible within one second. We repeated this 10 times. 
@@ -278,7 +278,7 @@ The logs show the results for the last iteration.
  
 It’s worth adding that for the current implementation of Delete, Realm has to perform a Read operation before every Delete operation. So, even with this unoptimized approach, Realm has a rather solid performance. 
 
-[You can see more here..](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs/MobileDbs/ViewModels/TestPerSecondPageViewModel.cs)
+[Click here for more](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs/MobileDbs/ViewModels/TestPerSecondPageViewModel.cs)
 
 ## Encryption
 All of the previous tests were run with encryption. And because of that, the performance could differ from an encrypted database. Let’s look at how both databases handle encryption. 
@@ -303,7 +303,7 @@ var config = new RealmConfiguration($"{dbName}.realm")
 };
 ```
 
-[You can see more here..](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs.Infrastructure.Realm/RealmManager.cs)
+[Click here for more](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs.Infrastructure.Realm/RealmManager.cs)
 
 You will have to use the *config* variable to create each Realm instance. According to their documentation, there’s always a small performance hit (typically less than 10% slower) when using encrypted Realm. Our tests confirm this. 
 
@@ -312,7 +312,7 @@ For SQLite, we used SQL Cipher. It’s better to use the *sqlite-net-sqlcipher* 
 await DataBase.QueryAsync<int>($"PRAGMA key={password}");
 ```
 
-[You can see more here..](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs.Infrastructure.SQLite/SQLiteManager.cs)
+[Click here for more](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs.Infrastructure.SQLite/SQLiteManager.cs)
 
 Be careful: SQLite encryption will hit application performance! On average, the performance hit was 26%. 
 
@@ -358,6 +358,6 @@ Although according to our tests, SQLite didn’t win, it’s still an excellent 
 ## Conclusion
 Realm and SQLite are very different. To decide which one suits your project best, first, you have to know what goals you want to achieve. Realm allows fast development and delivery to market. SQLite is easy to deploy and requires minimal configuration. The Realm Platform is perfect for small projects while SQLite is more beneficial for larger ones. 
 
-*No matter which of the two you choose, remember that the project’s success depends on the team that implements it.*
+>*"No matter which of the two you choose, remember that the project’s success depends on the team that implements it."*
 
 Contact our professionals at [JetSoftPro](http://www.jetsoftpro.com/) to achieve great results together. 
