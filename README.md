@@ -1,5 +1,3 @@
-# Realm vs SQLite
-
 ![Realm vs SQLite](https://github.com/Danyalo/realm-vs-sqlite/blob/master/SQLite%20vs%20Realm.png)
 
 # Realm vs SQLite: the Battle of Databases
@@ -212,8 +210,7 @@ As you can see, we were executing CRUD operations for three different repositori
 **Not In Order** (Operations are performed in parallel with one another) 
 ![Sqlite vs Realm not in order](https://github.com/lHubertl/realm-vs-sqlite/blob/master/Matterials/Sqlite_vs_Realm_not_in_order.PNG)
 
-*General time* - is the time of the last iteration.
-
+*General time* - is the time of the last iteration. <br />
 *Average time* - is the average of 30 iterations.
 
 **The verdict:** In this round, Realm is the winner. It scored 57% in the serial test and 62% in the parallel test, which means that Realm’s performance is better than SQLite’s. Realm is simply faster.
@@ -266,7 +263,7 @@ var filteringCustomers = (await _customerService.ReadByPredicate(item => item.Ag
 ## CRUD per second 
 In this test, we launched each of the operations as many times as possible within one second. We repeated this 10 times. 
 
-*Average* is an average number of all the completed operations in 10 iterations. 
+*Average* is an average number of all the completed operations in 10 iterations.<br />
 *Processed records* is a calculation of all operations per the last iteration. 
 
 ![Sqlite vs Realm CRUD operation per second](https://github.com/lHubertl/realm-vs-sqlite/blob/master/Matterials/Sqlite_vs_Realm_crud_per_second.PNG)
@@ -331,12 +328,10 @@ In the case with SQLite 2.8.x and Realm 4.4.x, don’t forget to create a second
 cfg.CreateMap<CustomerModel, CustomerModelDto>();
 cfg.CreateMap<CustomerModelDto, CustomerModel>();
 ```
-![Sqlite vs Realm automapper performance hit sqlite](https://github.com/lHubertl/realm-vs-sqlite/blob/master/Matterials/Sqlite_vs_Realm_automapper_performance_hit_sqlite.PNG)
-
+![Sqlite vs Realm automapper performance hit sqlite](https://github.com/lHubertl/realm-vs-sqlite/blob/master/Matterials/Sqlite_vs_Realm_automapper_performance_hit_sqlite.PNG) <br/>
 **SQLite performance hit: 1.6x** 
 
-![Sqlite vs Realm automapper performance hit realm](https://github.com/lHubertl/realm-vs-sqlite/blob/master/Matterials/Sqlite_vs_Realm_automapper_performance_hit_realm.PNG)
-
+![Sqlite vs Realm automapper performance hit realm](https://github.com/lHubertl/realm-vs-sqlite/blob/master/Matterials/Sqlite_vs_Realm_automapper_performance_hit_realm.PNG) <br/>
 **Realm performance hit: 2.5x**
 
 **The verdict:** Because Realm objects inherit from the *RealmObject* class, Automapper resolves models for Realm slower than for SQLite. Another fact is that Automapper’s initialization can last up to two seconds, which is terrible for mobile applications. So, we don’t recommend using Automapper for mobile apps. 
