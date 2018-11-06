@@ -205,9 +205,11 @@ private async Task TestInOrder()
 As you can see, we were executing CRUD operations for three different repositories. 
  
 **In order** (Operations are performed serially) 
+
 ![Sqlite vs Realm in order](https://github.com/lHubertl/realm-vs-sqlite/blob/master/Matterials/Sqlite_vs_Realm_in_order.PNG)
 
 **Not In Order** (Operations are performed in parallel with one another) 
+
 ![Sqlite vs Realm not in order](https://github.com/lHubertl/realm-vs-sqlite/blob/master/Matterials/Sqlite_vs_Realm_not_in_order.PNG)
 
 *General time* - is the time of the last iteration. <br />
