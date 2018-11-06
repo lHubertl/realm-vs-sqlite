@@ -13,13 +13,14 @@ Storing mobile application data is the task we face in almost every project here
 
 ## JetSoftPro’s database test 
 To explore the differences between Realm and SQLite, we’ve created a simple test application using Xamarin Forms and used iOS (iPhone 8) to test it. We tested both databases against the following criteria:
--Performance;
--Concurrency;
--Filtering and fetching;
--CRUD per second;
--Encryption;
--Foreign key;
--Maintainable by other developers.
+- Performance;
+- Concurrency;
+- Filtering and fetching;
+- CRUD per second;
+- Encryption;
+- Foreign key;
+- Maintainable by other developers.
+
 After that, we’ve compared the results to find out who’s the winner.
 
 ## Our application’s architecture
@@ -27,13 +28,13 @@ Before getting to the test results, let’s talk about the architecture of our t
  
 This is what our [apps’ structure](https://github.com/JetSoftPro/realm-vs-sqlite/tree/master/mobileDbs) looked like. 
 
--**Domain** stores all models and services, being the bridge between the client app and the databases;
--**Infrastructure** stores all interfaces and different databases;
--**MobileDbs.Domain.Models** are the models used by client projects;
--**MobileDbs.Domain.Services** are the services used by clients. They provide a resolved data repository through dependency injection;
--**MobileDbs.Domain.Infrastructure** stores all interfaces;
--**MobileDbs.Domain.Realm** and **MobileDbs.Domain.SQLite** projects store all data repositories and data transfer objects. They also include Realm and SQLite managers to store the basic configuration like encryption;
--The others are shared and client projects.
+- **Domain** stores all models and services, being the bridge between the client app and the databases;
+- **Infrastructure** stores all interfaces and different databases;
+- **MobileDbs.Domain.Models** are the models used by client projects;
+- **MobileDbs.Domain.Services** are the services used by clients. They provide a resolved data repository through dependency injection;
+- **MobileDbs.Domain.Infrastructure** stores all interfaces;
+- **MobileDbs.Domain.Realm** and **MobileDbs.Domain.SQLite** projects store all data repositories and data transfer objects. They also include Realm and SQLite managers to store the basic configuration like encryption;
+- The others are shared and client projects.
 
 ## CRUD operations 
 Now, let’s look at the implementation of CRUD (Create, Read, Update, Delete) operations. Create, Read, Update, Delete are the four basic things you can do with any database. Here are the differences between implementing them in Realm and SQLite.
@@ -205,15 +206,15 @@ private async Task TestInOrder()
 ```
 As you can see, we were executing CRUD operations for three different repositories. 
  
-In order (Operations are performed serially) 
+**In order** (Operations are performed serially) 
 ![Sqlite vs Realm in order](https://github.com/lHubertl/realm-vs-sqlite/blob/master/Matterials/Sqlite_vs_Realm_in_order.PNG)
 
-Not In Order (Operations are performed in parallel with one another) 
-
+**Not In Order** (Operations are performed in parallel with one another) 
 ![Sqlite vs Realm not in order](https://github.com/lHubertl/realm-vs-sqlite/blob/master/Matterials/Sqlite_vs_Realm_not_in_order.PNG)
 
-General time is the time of the last iteration. 
-Average time is the average of 30 iterations.
+*General time* - is the time of the last iteration.
+
+*Average time* - is the average of 30 iterations.
 
 **The verdict:** In this round, Realm is the winner. It scored 57% in the serial test and 62% in the parallel test, which means that Realm’s performance is better than SQLite’s. Realm is simply faster.
 
@@ -222,6 +223,7 @@ Average time is the average of 30 iterations.
 ## Concurrency
 The main idea of the concurrency test was to check the security of creating records in different threads. We ran 10 threads that were creating 10k records. After that, we checked if everything was created safely. Then, we calculated the total time.
 ```csharp
+//Some code was removed to save space
 private async Task ExecuteTest()
 {
     int iterations = 10;
@@ -243,7 +245,6 @@ private async Task ExecuteTest()
     CheckIfAllCustomersHasRightData();
 }
 ```
-> Some code was removed to save space
 
 ![Sqlite vs Realm Cuncurrency](https://github.com/lHubertl/realm-vs-sqlite/blob/master/Matterials/Sqlite_vs_Realm_concurrency.PNG)
 
@@ -301,17 +302,19 @@ var config = new RealmConfiguration($"{dbName}.realm")
     EncryptionKey = encryptKey
 };
 ```
-You will have to use the *config* variable to create each Realm instance. According to their documentation, there’s always a small performance hit (typically less than 10% slower) when using encrypted Realm. Our tests confirm this. 
 
 [You can see more here..](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs.Infrastructure.Realm/RealmManager.cs)
+
+You will have to use the *config* variable to create each Realm instance. According to their documentation, there’s always a small performance hit (typically less than 10% slower) when using encrypted Realm. Our tests confirm this. 
 
 For SQLite, we used SQL Cipher. It’s better to use the *sqlite-net-sqlcipher* package because it’s compliant with the .NET Standard 2.0. By using Cipher, it’s easy to pass a password as a query. But if the password is wrong, the next access to the database will throw an exception.
 ```csharp
 await DataBase.QueryAsync<int>($"PRAGMA key={password}");
 ```
-Be careful: SQLite encryption will hit application performance! On average, the performance hit was 26%. 
 
 [You can see more here..](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs.Infrastructure.SQLite/SQLiteManager.cs)
+
+Be careful: SQLite encryption will hit application performance! On average, the performance hit was 26%. 
 
 **The verdict:** We can’t tell which encryption method is safer, but Realm’s 10% performance hit sounds better than SQLite’s 26%. 
 
