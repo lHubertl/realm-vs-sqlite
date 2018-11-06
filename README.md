@@ -359,4 +359,5 @@ Although according to our tests, SQLite didn’t win, it’s still an excellent 
 Realm and SQLite are very different. To decide which one suits your project best, first, you have to know what goals you want to achieve. Realm allows fast development and delivery to market. SQLite is easy to deploy and requires minimal configuration. The Realm Platform is perfect for small projects while SQLite is more beneficial for larger ones. 
 
 *No matter which of the two you choose, remember that the project’s success depends on the team that implements it.*
+
 Contact our professionals at [JetSoftPro](http://www.jetsoftpro.com/) to achieve great results together. 
