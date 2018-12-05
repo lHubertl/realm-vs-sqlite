@@ -4,12 +4,12 @@
 
 Storing mobile application data is the task we face in almost every project here at [JetSoftPro](http://www.jetsoftpro.com/). That’s why we know that choosing a database management system is vital. Some developers prefer **Realm**, while others stick to **SQLite**. But which one is better for mobile apps? We’ve conducted several tests to compare these two database management systems. Read on to discover our results and find out whether Realm or SQLite suits your business goals better.  
 
-### Meet the contestants
+### Meet the Contestants
 **Realm** is an open-source database management system designed specifically for mobile apps. Realm is a non-relational database which means it stores data as a collection of JSON objects. It’s fast and simple, has extensive documentation and support. Today, Realm is not just a database - it has become a full-fledged solution thanks to many additional features like API management, encryption support and background synchronization.
 
 **SQLite** is an open-source database which is extremely popular around the world. That’s because SQLite is very lightweight, easy-to-deploy and requires minimal configuration. On top of that, it is free to use and is not owned by any company. SQLite is a relational database, which means it stores data as rows in the tables.
 
-## JetSoftPro’s database test 
+## JetSoftPro’s Database Test 
 To explore the differences between Realm and SQLite, we’ve created a simple test application using Xamarin Forms and used iOS (iPhone 8) to test it. We tested both databases against the following criteria:
 - Performance;
 - Concurrency;
@@ -21,7 +21,7 @@ To explore the differences between Realm and SQLite, we’ve created a simple te
 
 After that, we’ve compared the results to find out who’s the winner.
 
-## Our application’s architecture
+## Our Application’s Architecture
 Before getting to the test results, let’s talk about the architecture of our test application. We’ve made it easy to switch between database structures. To use another type of database, all you had to do was register another data repository in your dependency injection service. That’s why we needed different repositories for different databases in a single interface. 
  
 This is what our [apps’ structure](https://github.com/JetSoftPro/realm-vs-sqlite/tree/master/mobileDbs) looked like. 
@@ -34,7 +34,7 @@ This is what our [apps’ structure](https://github.com/JetSoftPro/realm-vs-sqli
 - **MobileDbs.Domain.Realm** and **MobileDbs.Domain.SQLite** projects store all data repositories and data transfer objects. They also include Realm and SQLite managers to store the basic configuration like encryption;
 - The others are shared and client projects.
 
-## CRUD operations 
+## CRUD Operations 
 Now, let’s look at the implementation of CRUD (Create, Read, Update, Delete) operations. Create, Read, Update, Delete are the four basic things you can do with any database. Here are the differences between implementing them in Realm and SQLite.
 
 ### SQLite: Create
@@ -251,7 +251,7 @@ private async Task ExecuteTest()
 
 [Click here for more](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs/MobileDbs/ViewModels/ConcurrencyPageViewModel.cs)
 
-## Filtering and fetching 
+## Filtering and Fetching 
 The filtering and fetching records are necessary to get the exact data we want. To test them, we generated 10k records randomly with the Age property between 30 and 65. After that, by using a simple expression, we got all the customers whose age is below 35 years. 
 ```csharp
 var filteringCustomers = (await _customerService.ReadByPredicate(item => item.Age < 35)).Data;
@@ -262,7 +262,7 @@ var filteringCustomers = (await _customerService.ReadByPredicate(item => item.Ag
 
 [Click here for more](https://github.com/JetSoftPro/realm-vs-sqlite/blob/master/mobileDbs/MobileDbs/MobileDbs/ViewModels/FilteringPageViewModel.cs)
 
-## CRUD per second 
+## CRUD Per Second 
 In this test, we launched each of the operations as many times as possible within one second. We repeated this 10 times. 
 
 *Average* is an average number of all the completed operations in 10 iterations.<br />
@@ -317,7 +317,7 @@ Be careful: SQLite encryption will hit application performance! On average, the 
 
 **The verdict:** We can’t tell which encryption method is safer, but Realm’s 10% performance hit sounds better than SQLite’s 26%. 
 
-## Foreign key 
+## Foreign Key 
 Since Realm isn’t a relational database, it doesn’t officially support the concept of foreign keys. Instead, Realm offers an ability to link objects as the children of a parent object directly. For one-to-one relationships, the child object’s type can be used as a property of the parent object. And for one-to-many relationships, a *Realm List* object can be used to store multiple child objects of the same type.
 
 To build relationships in SQLite, you have to use additional libraries like SQLite Extension. But for now, this library doesn’t work with the .NET Standard 2.0 at all. Which means it’s not really reliable.
@@ -338,14 +338,14 @@ cfg.CreateMap<CustomerModelDto, CustomerModel>();
 
 **The verdict:** Because Realm objects inherit from the *RealmObject* class, Automapper resolves models for Realm slower than for SQLite. Another fact is that Automapper’s initialization can last up to two seconds, which is terrible for mobile applications. So, we don’t recommend using Automapper for mobile apps. 
 
-## Maintainability by other developers 
+## Maintainability by Other Developers 
 Realm models should be inherited from the *RealmObject* class, and all objects should be created by a *Realm.CreateObject()* method. You have to create a transaction before creating any objects, which is inconvenient for executing mapping. On the other hand, Realm allows you to “listen” to object changes, which is a very handy way to update the UI if you use mapping.
 
 Realm is simple to set up. It doesn’t require the plumbing SQLite does, like getting a location for a file to store your DB in and creating *SqlAsyncConnection.* In Realm, we can just call the *GetInstance()* method and that’s it. 
 
 **The verdict:** SQLite can be quite fast if you know what you’re doing. But Realm seems to do the job well without you having to think how to do things like transactions.
 
-## The benefits of Realm and SQLite 
+## The Benefits of Realm and SQLite 
 Our tests reveal that Realm is faster than SQLite (applause!). Realm showed better results in terms of performance, concurrency, encryption, filtering and fetching. Also, it’s simple to set up and maintain by other developers. But SQLite is better at managing many requests per second. Now, what exactly does this mean? Let’s find out what benefits Realm and SQLite can bring to business projects. 
 
 Because Realm is simple and easy to work with, it allows fast development. This makes application deployment and delivery to market quick. Moreover, the Realm Platform has a lot of additional features which can save you time and money. It seems like Realm is a perfect tool for small or medium-sized projects.
