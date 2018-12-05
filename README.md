@@ -1,4 +1,4 @@
-![Realm vs SQLite](https://github.com/Danyalo/realm-vs-sqlite/blob/master/SQLite%20vs%20Realm.png)
+![Realm vs SQLite](https://github.com/lHubertl/realm-vs-sqlite/blob/master/Matterials/Databases.jpg)
 
 # Realm vs SQLite: the Battle of Databases
 
@@ -357,4 +357,6 @@ Realm and SQLite are very different. To decide which one suits your project best
 
 >*"No matter which of the two you choose, remember that the project’s success depends on the team that implements it."*
 
-Contact our professionals at [JetSoftPro](http://www.jetsoftpro.com/) to achieve great results together. 
+Contact our professionals at [JetSoftPro](http://www.jetsoftpro.com/) to achieve great results together.
+
+*Created by Valerii Sovytskyi, Xamarin Developer*
